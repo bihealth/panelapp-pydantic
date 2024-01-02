@@ -1,0 +1,15 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include CHANGELOG.md
+include LICENSE
+include README.md
+
+recursive-include requirements *.txt
+recursive-include * py.typed
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude tests *
+recursive-exclude venv *
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif
+include panelapp_pydantic/_version.py
