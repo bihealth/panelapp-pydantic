@@ -43,3 +43,10 @@ pyright:
 .PHONY: deps
 deps:
 	pipenv install --categories=packages,dev-packages
+
+# Build the data model
+.PHONY: data-model
+data-model: deps
+	curl 'https://panelapp.genomicsengland.co.uk/api/docs/?format=openapi' | jq . > panelapp_pydantic/api.json && \
+	pipenv run datamodel-codegen --input panelapp_pydantic/api.json --input-file-type=json --output panelapp_pydantic/model.py --output-model-type pydantic_v2.BaseModel --target-python-version=3.11 --use-schema-description --disable-timestamp --use-standard-collections --use-generic-container-types  --use-subclass-enum && \
+	make format
